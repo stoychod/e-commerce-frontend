@@ -1,0 +1,12 @@
+:root {
+
+  --color-foreground: #ffffff;
+  --color-background-header: #232f3e;
+
+  --spacing-0: 0.4rem;
+  --spacing-1: 0.8rem;
+  --spacing-2: 1.6rem;
+  --spacing-3: 2.4rem;
+  --spacing-4: 3.6rem;
+  --spacing-5: 6.4rem;
+}
