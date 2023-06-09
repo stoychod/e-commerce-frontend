@@ -10,7 +10,6 @@ const Header = () => {
       <div className="brand">Eshop</div>
       <div>
         <Button
-          sx={{ fontSize: "1.2rem" }}
           aria-label="sign-in"
           color="inherit"
         >
@@ -18,7 +17,7 @@ const Header = () => {
         </Button>
         <IconButton aria-label="access shopping cart" color="inherit">
           <Badge badgeContent={2} color="primary">
-            <AddShoppingCartIcon sx={{ fontSize: "2rem" }} />
+            <AddShoppingCartIcon />
           </Badge>
         </IconButton>
       </div>
