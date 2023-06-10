@@ -1,0 +1,6 @@
+.form {
+  max-width: 20vw;
+  width: 20vw;
+  display: grid;
+  row-gap: var(--spacing-3);
+}
