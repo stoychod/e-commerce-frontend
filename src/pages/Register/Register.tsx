@@ -7,8 +7,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { registerUser } from "../../api/register";
+import { useState } from "react";
 
-const RegisterForm = () => {
+const Register = () => {
+  const [responseError, setResponseError] = useState("");
   return (
     <Box
       sx={{
@@ -45,10 +48,25 @@ const RegisterForm = () => {
             password: Yup.string().password().required("Passowrd is required"),
           })}
           onSubmit={async (values, { resetForm }) => {
-            setTimeout(() => {
-              console.log(values);
+            try {
+              // reset state from previous error
+              if (responseError) {
+                console.log("reset state");
+                setResponseError("");
+              }
+
+              // if response is ok reset the form
+              const response = await registerUser(values);
               resetForm();
-            }, 4000);
+
+              console.dir(response);
+            } catch (error) {
+              if (error instanceof Error) {
+                // if there is an error set state so it can be displayed to the user
+                setResponseError(error.message);
+                console.log(error.message);
+              }
+            }
           }}
         >
           {({ isSubmitting }) => (
@@ -62,10 +80,18 @@ const RegisterForm = () => {
               </Typography>
               <Form className="form">
                 <Field name="firstName" as={TextField} label="First Name" />
-                <ErrorMessage name="firstName" />
+                <ErrorMessage
+                  component="span"
+                  className="error-message"
+                  name="firstName"
+                />
 
                 <Field name="lastName" as={TextField} label="Last Name" />
-                <ErrorMessage name="lastName" />
+                <ErrorMessage
+                  component="span"
+                  className="error-message"
+                  name="lastName"
+                />
 
                 <Field
                   name="email"
@@ -73,7 +99,11 @@ const RegisterForm = () => {
                   as={TextField}
                   label="Email"
                 />
-                <ErrorMessage name="email" />
+                <ErrorMessage
+                  component="span"
+                  className="error-message"
+                  name="email"
+                />
 
                 <Field
                   name="password"
@@ -81,7 +111,15 @@ const RegisterForm = () => {
                   as={TextField}
                   label="Passowrd"
                 />
-                <ErrorMessage name="password" />
+                <ErrorMessage
+                  component="span"
+                  className="error-message"
+                  name="password"
+                />
+
+                {responseError && (
+                  <span className="error-message"> {responseError} </span>
+                )}
 
                 <Button
                   variant="contained"
@@ -99,4 +137,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default Register;
