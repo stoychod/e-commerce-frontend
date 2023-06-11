@@ -1,0 +1,20 @@
+#error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+h1 {
+ font-size: 2rem;
+  font-weight: bold;
+}
+
+p, h1 {
+  margin: var(--spacing-4);
+}
+
+i {
+  color: #666666;
+}
