@@ -18,3 +18,14 @@ main {
   flex-grow: 1;
   justify-content: center;
 }
+
+.form {
+  max-width: 20vw;
+  width: 20vw;
+  display: grid;
+  row-gap: var(--spacing-3);
+}
+
+.error-message {
+  color: red;
+}
