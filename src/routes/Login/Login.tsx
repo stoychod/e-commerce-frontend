@@ -1,15 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "./Register.css";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { registerUser } from "../../api/register";
-import { useState } from "react";
 
 const Login = () => {
-  const [responseError, setResponseError] = useState("");
   return (
     <Box
       sx={{
@@ -39,21 +35,16 @@ const Login = () => {
           })}
           onSubmit={async (values, { resetForm }) => {
             try {
-              // reset state from previous error
-              if (responseError) {
-                console.log("reset state");
-                setResponseError("");
-              }
-
+              
               // if response is ok reset the form
               // const response = await registerUser(values);
               resetForm();
 
-              console.dir(response);
+              // console.dir(response);
             } catch (error) {
               if (error instanceof Error) {
                 // if there is an error set state so it can be displayed to the user
-                setResponseError(error.message);
+                // setResponseError(error.message);
                 console.log(error.message);
               }
             }
@@ -93,9 +84,9 @@ const Login = () => {
                   name="password"
                 />
 
-                {responseError && (
-                  <span className="error-message"> {responseError} </span>
-                )}
+                {/* {responseError && ( */}
+                {/*   <span className="error-message"> {responseError} </span> */}
+                {/* )} */}
 
                 <Button
                   variant="contained"
