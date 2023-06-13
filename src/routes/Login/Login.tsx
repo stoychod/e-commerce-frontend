@@ -4,8 +4,23 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { useLoginUserMutation } from "../../api/apiSlice";
+import { isApiError, isErrorWithMessage } from "../../api/helpers/errors";
 
 const Login = () => {
+  const [loginUser, { error }] =
+    useLoginUserMutation();
+
+  const renderError = (err: unknown) => {
+    if (isApiError(err)) {
+      // you can access all properties of `FetchBaseQueryError` here
+      return <span className="error-message"> {err.data.message} </span>;
+    } else if (isErrorWithMessage(err)) {
+      // you can access a string 'message' property here
+      <span className="error-message"> {err.message} </span>;
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -31,22 +46,23 @@ const Login = () => {
             email: Yup.string()
               .email("Invalid email address")
               .required("Email is required"),
-            password: Yup.string().password().required("Passowrd is required"),
+            password: Yup.string()
+              .password()
+              // disable password requirements
+              .min(0)
+              .minLowercase(0)
+              .minUppercase(0)
+              .minNumbers(0)
+              .minSymbols(0)
+              .required("Passowrd is required"),
           })}
           onSubmit={async (values, { resetForm }) => {
             try {
-              
+              await loginUser(values).unwrap();
               // if response is ok reset the form
-              // const response = await registerUser(values);
               resetForm();
-
-              // console.dir(response);
             } catch (error) {
-              if (error instanceof Error) {
-                // if there is an error set state so it can be displayed to the user
-                // setResponseError(error.message);
-                console.log(error.message);
-              }
+              console.error("Error:", error);
             }
           }}
         >
@@ -84,9 +100,7 @@ const Login = () => {
                   name="password"
                 />
 
-                {/* {responseError && ( */}
-                {/*   <span className="error-message"> {responseError} </span> */}
-                {/* )} */}
+                {renderError(error)}
 
                 <Button
                   variant="contained"
