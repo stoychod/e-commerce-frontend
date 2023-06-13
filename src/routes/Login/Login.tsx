@@ -8,8 +8,7 @@ import { useLoginUserMutation } from "../../api/apiSlice";
 import { isApiError, isErrorWithMessage } from "../../api/helpers/errors";
 
 const Login = () => {
-  const [loginUser, { error }] =
-    useLoginUserMutation();
+  const [loginUser, { error }] = useLoginUserMutation();
 
   const renderError = (err: unknown) => {
     if (isApiError(err)) {

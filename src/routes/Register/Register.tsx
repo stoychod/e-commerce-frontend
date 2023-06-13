@@ -8,8 +8,10 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useRegisterUserMutation } from "../../api/apiSlice";
 import { isApiError, isErrorWithMessage } from "../../api/helpers/errors";
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+  const navigate = useNavigate();
   const [registerUser, { error }] = useRegisterUserMutation();
 
   const renderError = (err: unknown) => {
@@ -63,6 +65,7 @@ const Register = () => {
               await registerUser(values).unwrap();
               // if response is ok reset the form
               resetForm();
+              navigate("/auth/login");
             } catch (error) {
               console.error("Error:", error);
             }
