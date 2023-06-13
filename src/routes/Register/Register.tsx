@@ -6,11 +6,22 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { registerUser } from "../../api/register";
-import { useState } from "react";
+import { useRegisterUserMutation } from "../../api/apiSlice";
+import { isApiError, isErrorWithMessage } from "../../api/helpers/errors";
 
 const Register = () => {
-  const [responseError, setResponseError] = useState("");
+  const [registerUser, { error }] = useRegisterUserMutation();
+
+  const renderError = (err: unknown) => {
+    if (isApiError(err)) {
+      // you can access all properties of `FetchBaseQueryError` here
+      return <span className="error-message"> {err.data.message} </span>;
+    } else if (isErrorWithMessage(err)) {
+      // you can access a string 'message' property here
+      <span className="error-message"> {err.message} </span>;
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -48,23 +59,12 @@ const Register = () => {
           })}
           onSubmit={async (values, { resetForm }) => {
             try {
-              // reset state from previous error
-              if (responseError) {
-                console.log("reset state");
-                setResponseError("");
-              }
-
+              // you need the unwrap() call to get any error which will go in the catch block
+              await registerUser(values).unwrap();
               // if response is ok reset the form
-              const response = await registerUser(values);
               resetForm();
-
-              console.dir(response);
             } catch (error) {
-              if (error instanceof Error) {
-                // if there is an error set state so it can be displayed to the user
-                setResponseError(error.message);
-                console.log(error.message);
-              }
+              console.error("Error:", error);
             }
           }}
         >
@@ -116,9 +116,7 @@ const Register = () => {
                   name="password"
                 />
 
-                {responseError && (
-                  <span className="error-message"> {responseError} </span>
-                )}
+                {renderError(error)}
 
                 <Button
                   variant="contained"

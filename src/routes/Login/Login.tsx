@@ -58,6 +58,7 @@ const Login = () => {
           })}
           onSubmit={async (values, { resetForm }) => {
             try {
+              // you need the unwrap() call to get any error which will go in the catch block
               await loginUser(values).unwrap();
               // if response is ok reset the form
               resetForm();
