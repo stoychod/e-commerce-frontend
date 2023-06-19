@@ -20,6 +20,13 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Authenticated"],
     }),
+    logoutUser: builder.mutation<unknown, void>({
+      query: () => ({
+        url: "/auth/logout",
+        method: "POST",
+      }),
+      invalidatesTags: ["Authenticated"],
+    }),
     checkAuthenticated: builder.query<boolean, void>({
       query: () => "/auth/checkAuthentication",
       providesTags: ["Authenticated"],
@@ -31,4 +38,5 @@ export const {
   useRegisterUserMutation,
   useLoginUserMutation,
   useCheckAuthenticatedQuery,
+  useLogoutUserMutation,
 } = apiSlice;
