@@ -4,11 +4,13 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { useNavigate } from "react-router-dom";
 import { useLoginUserMutation } from "../../api/apiSlice";
 import { isApiError, isErrorWithMessage } from "../../api/helpers/errors";
 
 const Login = () => {
   const [loginUser, { error }] = useLoginUserMutation();
+  const navigete = useNavigate();
 
   const renderError = (err: unknown) => {
     if (isApiError(err)) {
@@ -61,6 +63,7 @@ const Login = () => {
               await loginUser(values).unwrap();
               // if response is ok reset the form
               resetForm();
+              navigete("/");
             } catch (error) {
               console.error("Error:", error);
             }
