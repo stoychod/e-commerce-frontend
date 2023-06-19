@@ -1,5 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+interface Product {
+  id: number;
+  name: string;
+  description: string;
+  category: string;
+  price: number;
+  image: string;
+}
+
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
@@ -31,6 +40,9 @@ export const apiSlice = createApi({
       query: () => "/auth/checkAuthentication",
       providesTags: ["Authenticated"],
     }),
+    getProducts: builder.query<Product[], void>({
+      query: () => "/products",
+    }),
   }),
 });
 
@@ -39,4 +51,5 @@ export const {
   useLoginUserMutation,
   useCheckAuthenticatedQuery,
   useLogoutUserMutation,
+  useGetProductsQuery,
 } = apiSlice;
