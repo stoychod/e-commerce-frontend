@@ -8,6 +8,7 @@ import store from "./store/store";
 import ErrorPage from "./routes/Error/Error";
 import Register from "./routes/Register/Register";
 import Login from "./routes/Login/Login";
+import Products from "./routes/Products/Products";
 
 const router = createBrowserRouter([
   {
@@ -16,12 +17,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/auth/register",
+        path: "auth/register",
         element: <Register />,
       },
       {
         path: "auth/login",
         element: <Login />,
+      },
+      {
+        path: "products",
+        element: <Products />,
       },
     ],
   },
