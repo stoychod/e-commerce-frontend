@@ -4,13 +4,14 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }: { product: Product }) => {
-  const { name, description, price, image } = product;
+  const { id, name, description, price, image } = product;
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
       <Card>
-        <CardActionArea>
+        <CardActionArea component={Link} to={`/products/${id}`}>
           <CardMedia component="img" height="260" image={image} alt={name} />
           <CardContent sx={{ height: 220 }}>
             <Typography gutterBottom variant="h5" component="div">
@@ -29,7 +30,9 @@ const ProductCard = ({ product }: { product: Product }) => {
             >
               {description}
             </Typography>
-            <Typography variant="h5" align="center">£{price / 100}</Typography>
+            <Typography variant="h5" align="center">
+              £{price / 100}
+            </Typography>
           </CardContent>
         </CardActionArea>
       </Card>
