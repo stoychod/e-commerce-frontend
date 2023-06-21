@@ -23,14 +23,7 @@ const Login = () => {
   };
 
   return (
-    <Box
-      sx={{
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <Box marginTop={10} display={"flex"} justifyContent={"center"}>
       <Box
         sx={{
           padding: "4rem 2rem",
