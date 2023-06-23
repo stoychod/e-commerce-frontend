@@ -10,6 +10,7 @@ import { isApiError, isErrorWithMessage } from "../../api/helpers/errors";
 
 const Login = () => {
   const [loginUser, { error }] = useLoginUserMutation();
+  const [loginUser, { error: loginError }] = useLoginUserMutation();
   const navigete = useNavigate();
 
   const renderError = (err: unknown) => {
@@ -97,6 +98,7 @@ const Login = () => {
                 />
 
                 {renderError(error)}
+                {renderError(loginError)}
 
                 <Button
                   variant="contained"
