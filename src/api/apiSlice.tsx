@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
-  tagTypes: ["Authenticated"],
+  tagTypes: ["Authenticated", "Cart"],
   endpoints: (builder) => ({
     registerUser: builder.mutation({
       query: (userData) => ({
@@ -18,14 +18,14 @@ export const apiSlice = createApi({
         method: "POST",
         body: userData,
       }),
-      invalidatesTags: ["Authenticated"],
+      invalidatesTags: ["Authenticated", "Cart"],
     }),
     logoutUser: builder.mutation<unknown, void>({
       query: () => ({
         url: "/auth/logout",
         method: "POST",
       }),
-      invalidatesTags: ["Authenticated"],
+      invalidatesTags: ["Authenticated", "Cart"],
     }),
     checkAuthenticated: builder.query<boolean, void>({
       query: () => "/auth/checkAuthentication",
@@ -43,6 +43,10 @@ export const apiSlice = createApi({
         method: "POST",
       }),
     }),
+    getCart: builder.query<Product[], void>({
+      query: () => "/cart",
+      providesTags: ["Cart"],
+    }),
   }),
 });
 
@@ -54,4 +58,5 @@ export const {
   useGetProductsQuery,
   useGetProductByIdQuery,
   useCreateCartMutation,
+  useGetCartQuery,
 } = apiSlice;

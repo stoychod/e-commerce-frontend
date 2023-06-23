@@ -4,13 +4,17 @@ import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useNavigate } from "react-router-dom";
-import { useCheckAuthenticatedQuery } from "../../api/apiSlice";
+import {
+  useCheckAuthenticatedQuery,
+  useGetCartQuery,
+} from "../../api/apiSlice";
 import AccountMenu from "../AccountMenu/AccountMenu";
 
 const Header = () => {
   const navigate = useNavigate();
 
   const { data: isAuthenticated } = useCheckAuthenticatedQuery();
+  const { data: cartItems } = useGetCartQuery();
   return (
     <header>
       <div className="brand">Eshop</div>
@@ -23,7 +27,7 @@ const Header = () => {
           </Button>
         )}
         <IconButton aria-label="access shopping cart" color="inherit">
-          <Badge badgeContent={2} color="primary">
+          <Badge badgeContent={cartItems?.length} color="primary">
             <AddShoppingCartIcon />
           </Badge>
         </IconButton>
