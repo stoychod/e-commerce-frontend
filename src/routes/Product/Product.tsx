@@ -6,7 +6,10 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Link from "@mui/material/Link";
 import { Link as RouterLink, useParams } from "react-router-dom";
-import { useGetProductByIdQuery } from "../../api/apiSlice";
+import {
+  useGetProductByIdQuery,
+  useAddCartItemMutation,
+} from "../../api/apiSlice";
 import { useState } from "react";
 import { Button, Typography } from "@mui/material";
 
@@ -22,6 +25,8 @@ const Product = () => {
   };
 
   const { data: product } = useGetProductByIdQuery(productId);
+
+  const [addCartItem] = useAddCartItemMutation();
 
   return (
     <Box padding={3} maxWidth="1500px" marginX="auto">
@@ -83,7 +88,12 @@ const Product = () => {
                 <MenuItem value={7}>7</MenuItem>
               </Select>
             </FormControl>
-            <Button variant="contained">Add to Basket</Button>
+            <Button
+              variant="contained"
+              onClick={() => addCartItem({ productId, quantity })}
+            >
+              Add to Basket
+            </Button>
           </Box>
         </Grid>
       </Grid>
