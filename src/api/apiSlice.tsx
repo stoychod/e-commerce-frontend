@@ -37,6 +37,12 @@ export const apiSlice = createApi({
     getProductById: builder.query<Product, string>({
       query: (productId) => `/products/${productId}`,
     }),
+    createCart: builder.mutation<unknown, void>({
+      query: () => ({
+        url: "/cart",
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -47,4 +53,5 @@ export const {
   useLogoutUserMutation,
   useGetProductsQuery,
   useGetProductByIdQuery,
+  useCreateCartMutation,
 } = apiSlice;

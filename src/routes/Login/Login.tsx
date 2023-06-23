@@ -5,12 +5,16 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
-import { useLoginUserMutation } from "../../api/apiSlice";
+import {
+  useLoginUserMutation,
+  useCreateCartMutation,
+} from "../../api/apiSlice";
 import { isApiError, isErrorWithMessage } from "../../api/helpers/errors";
 
 const Login = () => {
-  const [loginUser, { error }] = useLoginUserMutation();
   const [loginUser, { error: loginError }] = useLoginUserMutation();
+
+  const [createCart] = useCreateCartMutation();
   const navigete = useNavigate();
 
   const renderError = (err: unknown) => {
@@ -55,9 +59,14 @@ const Login = () => {
             try {
               // you need the unwrap() call to get any error which will go in the catch block
               await loginUser(values).unwrap();
+
+              // create a user cart if does not exist on login. The server checks if a cart 
+              // exist for tha currently logged user and creates one if not
+              await createCart().unwrap();
+
               // if response is ok reset the form
               resetForm();
-              navigete("/");
+              navigete("/products");
             } catch (error) {
               console.error("Error:", error);
             }
@@ -97,7 +106,6 @@ const Login = () => {
                   name="password"
                 />
 
-                {renderError(error)}
                 {renderError(loginError)}
 
                 <Button
