@@ -26,7 +26,7 @@ const Header = () => {
             Sign-in
           </Button>
         )}
-        <IconButton aria-label="access shopping cart" color="inherit">
+        <IconButton href="/cart" aria-label="access shopping cart" color="inherit">
           <Badge badgeContent={cartItems?.length} color="primary">
             <AddShoppingCartIcon />
           </Badge>
