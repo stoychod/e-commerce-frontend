@@ -55,7 +55,7 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Cart"],
     }),
-    updateCartItem: builder.mutation<unknown, CartItem>({
+    updateCartItem: builder.mutation<unknown, PartialCartItem>({
       query: (cartItem) => ({
         url: `/cart/items/${cartItem.cartItemId}`,
         method: "PUT",

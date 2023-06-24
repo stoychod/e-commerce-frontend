@@ -10,10 +10,15 @@ interface Product {
 interface CartItem {
   cartItemId: string;
   quantity: number;
-  id?: number;
-  name?: string;
-  description?: string;
-  category?: string;
-  price?: number;
-  image?: string;
+  id: number;
+  name: string;
+  description: string;
+  category: string;
+  price: number;
+  image: string;
+}
+
+interface PartialCartItem {
+  cartItemId: string;
+  quantity: number;
 }
