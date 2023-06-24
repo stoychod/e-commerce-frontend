@@ -5,5 +5,15 @@ interface Product {
   category: string;
   price: number;
   image: string;
-  quantity?: number;
+}
+
+interface CartItem {
+  cartItemId: string;
+  quantity: number;
+  id?: number;
+  name?: string;
+  description?: string;
+  category?: string;
+  price?: number;
+  image?: string;
 }

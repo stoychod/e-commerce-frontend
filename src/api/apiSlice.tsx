@@ -43,7 +43,7 @@ export const apiSlice = createApi({
         method: "POST",
       }),
     }),
-    getCart: builder.query<Product[], void>({
+    getCart: builder.query<CartItem[], void>({
       query: () => "/cart",
       providesTags: ["Cart"],
     }),
@@ -52,6 +52,14 @@ export const apiSlice = createApi({
         url: "/cart/items",
         method: "POST",
         body: productData,
+      }),
+      invalidatesTags: ["Cart"],
+    }),
+    updateCartItem: builder.mutation<unknown, CartItem>({
+      query: (cartItem) => ({
+        url: `/cart/items/${cartItem.cartItemId}`,
+        method: "PUT",
+        body: { quantity: cartItem.quantity },
       }),
       invalidatesTags: ["Cart"],
     }),
@@ -68,4 +76,5 @@ export const {
   useCreateCartMutation,
   useGetCartQuery,
   useAddCartItemMutation,
+  useUpdateCartItemMutation,
 } = apiSlice;

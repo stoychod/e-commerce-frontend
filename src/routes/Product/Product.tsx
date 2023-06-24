@@ -1,5 +1,8 @@
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -8,25 +11,52 @@ import Link from "@mui/material/Link";
 import { Link as RouterLink, useParams } from "react-router-dom";
 import {
   useGetProductByIdQuery,
+  useGetCartQuery,
   useAddCartItemMutation,
+  useUpdateCartItemMutation,
 } from "../../api/apiSlice";
-import { useState } from "react";
-import { Button, Typography } from "@mui/material";
 
 const Product = () => {
+  // Keep track of product quantity
   const [quantity, setQuantity] = useState("1");
 
+  // Get the route /products/:productId parameter
   const { id } = useParams();
   const productId = id || "";
 
-  const handleChange = (event: SelectChangeEvent) => {
-    console.log(event.target);
+  // Get items currently in the cart
+  const { data: cartItems } = useGetCartQuery();
+
+  // Get current product data
+  const { data: product } = useGetProductByIdQuery(productId);
+
+  // addCartItem api funtion
+  // it takes a productData object - {productId: string, quantity: string}
+  const [addCartItem] = useAddCartItemMutation();
+
+  // updateCart api function
+  // it takes a cartItem object as a parameter - {cartItemId: string, quantity: number}
+  const [updateCartItem] = useUpdateCartItemMutation();
+
+  const handleQuantityChange = (event: SelectChangeEvent) => {
     setQuantity(event.target.value);
   };
 
-  const { data: product } = useGetProductByIdQuery(productId);
-
-  const [addCartItem] = useAddCartItemMutation();
+  const handleAddToBasket = () => {
+    // Check if the same product is already in the cart
+    const cartItem = cartItems?.find((product) => product.id === Number(id));
+    if (cartItem) {
+      // if so only update quantity
+      const newQuantity = Number(quantity) + cartItem.quantity;
+      updateCartItem({
+        cartItemId: cartItem.cartItemId,
+        quantity: newQuantity,
+      });
+    } else {
+      // else add product to cart
+      addCartItem({ productId, quantity });
+    }
+  };
 
   return (
     <Box padding={3} maxWidth="1500px" marginX="auto">
@@ -77,7 +107,7 @@ const Product = () => {
                 id="demo-simple-select"
                 value={quantity}
                 label="Quantity"
-                onChange={handleChange}
+                onChange={handleQuantityChange}
               >
                 <MenuItem value={1}>1</MenuItem>
                 <MenuItem value={2}>2</MenuItem>
@@ -88,10 +118,7 @@ const Product = () => {
                 <MenuItem value={7}>7</MenuItem>
               </Select>
             </FormControl>
-            <Button
-              variant="contained"
-              onClick={() => addCartItem({ productId, quantity })}
-            >
+            <Button variant="contained" onClick={handleAddToBasket}>
               Add to Basket
             </Button>
           </Box>
