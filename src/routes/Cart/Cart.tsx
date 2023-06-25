@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -19,23 +20,43 @@ const Cart = () => {
     setSubtotal(total || 0);
   }, [cartItems]);
   return (
-    <Box padding={3} maxWidth="1500px" marginX="auto">
-      <Grid container marginTop="0" spacing={3}>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            padding: 4,
-            border: "1px solid gray",
-            borderRadius: 2,
-          }}
-        >
-          <Typography gutterBottom variant="h6">
-            Subtotal ({cartItems?.length} items): £{subTotal}
-          </Typography>
-          <Button variant="contained">Proceed to ckeckout</Button>
-        </Box>
-      </Grid>
+    <Box sx={{ backgroundColor: "#eaeaed", width: "100%" }}>
+      <Box padding={3} maxWidth="xl" marginX="auto">
+        <Stack direction="row" spacing={3} padding={2}>
+          <Paper sx={{ flexGrow: 1, paddingX: 2 }}>
+            <Typography variant="h4" component="h1" paddingTop={2}>
+              Shopping basket
+            </Typography>
+            <Typography
+              variant="h6"
+              component="h3"
+              fontWeight={400}
+              lineHeight={1.2}
+              align="right"
+              borderBottom="1px solid gray"
+            >
+              price
+            </Typography>
+          </Paper>
+          <Paper
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              padding: 4,
+            }}
+          >
+            <Typography component="div" gutterBottom variant="h6">
+              Subtotal ({cartItems?.length} items):{" "}
+              <Box fontWeight="bold" display="inline">
+                £{subTotal}
+              </Box>
+            </Typography>
+            <Button sx={{ marginTop: 4 }} variant="contained">
+              Proceed to ckeckout
+            </Button>
+          </Paper>
+        </Stack>
+      </Box>
     </Box>
   );
 };
