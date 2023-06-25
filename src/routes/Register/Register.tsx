@@ -25,7 +25,7 @@ const Register = () => {
   };
 
   return (
-    <Box display={"flex"} justifyContent={"center"} marginTop={10}>
+    <Box marginTop={10} marginX="auto">
       <Box
         sx={{
           padding: "4rem 2rem",

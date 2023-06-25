@@ -28,7 +28,7 @@ const Login = () => {
   };
 
   return (
-    <Box marginTop={10} display={"flex"} justifyContent={"center"}>
+    <Box marginTop={10} marginX="auto">
       <Box
         sx={{
           padding: "4rem 2rem",
@@ -60,7 +60,7 @@ const Login = () => {
               // you need the unwrap() call to get any error which will go in the catch block
               await loginUser(values).unwrap();
 
-              // create a user cart if does not exist on login. The server checks if a cart 
+              // create a user cart if does not exist on login. The server checks if a cart
               // exist for tha currently logged user and creates one if not
               await createCart().unwrap();
 
