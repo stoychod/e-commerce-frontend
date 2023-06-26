@@ -100,7 +100,11 @@ const Product = () => {
             }}
           >
             <Typography gutterBottom variant="h5">
-              £{product && product?.price / 100}
+              {product &&
+                (product?.price / 100).toLocaleString("en-GB", {
+                  style: "currency",
+                  currency: "GBP",
+                })}
             </Typography>
             <FormControl
               sx={{ my: 4, minWidth: 120, maxWidth: 120 }}

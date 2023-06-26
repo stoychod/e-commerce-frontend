@@ -31,7 +31,10 @@ const ProductCard = ({ product }: { product: Product }) => {
               {description}
             </Typography>
             <Typography variant="h5" align="center">
-              £{price / 100}
+              {(price / 100).toLocaleString("en-GB", {
+                style: "currency",
+                currency: "GBP",
+              })}
             </Typography>
           </CardContent>
         </CardActionArea>
