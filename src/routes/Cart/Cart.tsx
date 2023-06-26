@@ -5,10 +5,13 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { useGetCartQuery } from "../../api/apiSlice";
+import CartItem from "../CartItem/CartItem";
 
 const Cart = () => {
   // Get items currently in the cart
   const { data: cartItems } = useGetCartQuery();
+
+  // Keep track of subtotal amount
   const [subTotal, setSubtotal] = useState(0);
 
   useEffect(() => {
@@ -19,12 +22,35 @@ const Cart = () => {
 
     setSubtotal(total || 0);
   }, [cartItems]);
+
+  const renderCartItems = () => {
+    if (cartItems && cartItems?.length > 0) {
+      const items = cartItems?.map((cartItem) => {
+        return <CartItem key={cartItem.cartItemId} cartItem={cartItem} />;
+      });
+      return items;
+    }
+
+    return <Typography variant="h5" align="center" component="h3"
+     sx={{
+        borderBottom: "1px solid gray",
+        paddingY: "6rem"
+        
+      }}
+    >Your basket is empty</Typography>;
+  };
+
   return (
     <Box sx={{ backgroundColor: "#eaeaed", width: "100%" }}>
       <Box padding={3} maxWidth="xl" marginX="auto">
-        <Stack direction="row" spacing={3} padding={2}>
+        <Stack
+          direction="row"
+          spacing="1.5rem"
+          padding="1rem"
+          alignItems="flex-start"
+        >
           <Paper sx={{ flexGrow: 1, paddingX: 2 }}>
-            <Typography variant="h4" component="h1" paddingTop={2}>
+            <Typography variant="h4" component="h1" paddingTop="1rem">
               Shopping basket
             </Typography>
             <Typography
@@ -37,21 +63,42 @@ const Cart = () => {
             >
               price
             </Typography>
+            {renderCartItems()}
+            <Typography
+              component="div"
+              gutterBottom
+              variant="h6"
+              align="right"
+              marginBottom="3rem"
+            >
+              Subtotal ({cartItems?.length}{" "}
+              {cartItems?.length === 1 ? "item" : "items"}):{" "}
+              <Box fontWeight="bold" display="inline">
+                {subTotal.toLocaleString("en-GB", {
+                  style: "currency",
+                  currency: "GBP",
+                })}
+              </Box>
+            </Typography>
           </Paper>
           <Paper
             sx={{
               display: "flex",
               flexDirection: "column",
-              padding: 4,
+              padding: "2rem",
             }}
           >
             <Typography component="div" gutterBottom variant="h6">
-              Subtotal ({cartItems?.length} items):{" "}
+              Subtotal ({cartItems?.length}{" "}
+              {cartItems?.length === 1 ? "item" : "items"}):{" "}
               <Box fontWeight="bold" display="inline">
-                £{subTotal}
+                {subTotal.toLocaleString("en-GB", {
+                  style: "currency",
+                  currency: "GBP",
+                })}
               </Box>
             </Typography>
-            <Button sx={{ marginTop: 4 }} variant="contained">
+            <Button sx={{ marginTop: "2rem" }} variant="contained">
               Proceed to ckeckout
             </Button>
           </Paper>
