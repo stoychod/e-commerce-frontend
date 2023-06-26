@@ -34,7 +34,7 @@ const Product = () => {
   // it takes a productData object - {productId: string, quantity: string}
   const [addCartItem] = useAddCartItemMutation();
 
-  // updateCart api function
+  // updateCartItem api function
   // it takes a cartItem object as a parameter - {cartItemId: string, quantity: number}
   const [updateCartItem] = useUpdateCartItemMutation();
 
