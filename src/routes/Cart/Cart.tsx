@@ -31,13 +31,19 @@ const Cart = () => {
       return items;
     }
 
-    return <Typography variant="h5" align="center" component="h3"
-     sx={{
-        borderBottom: "1px solid gray",
-        paddingY: "6rem"
-        
-      }}
-    >Your basket is empty</Typography>;
+    return (
+      <Typography
+        variant="h5"
+        align="center"
+        component="h3"
+        sx={{
+          borderBottom: "1px solid gray",
+          paddingY: "6rem",
+        }}
+      >
+        Your basket is empty
+      </Typography>
+    );
   };
 
   return (
@@ -101,6 +107,7 @@ const Cart = () => {
             <Button sx={{ marginTop: "2rem" }} variant="contained">
               Proceed to ckeckout
             </Button>
+            <Button sx={{ marginTop: "2rem" }} variant="contained" color="secondary" href="/products"> Continue shopping</Button>
           </Paper>
         </Stack>
       </Box>

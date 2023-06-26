@@ -8,7 +8,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Link from "@mui/material/Link";
-import { Link as RouterLink, useParams } from "react-router-dom";
+import { Link as RouterLink, useParams, useNavigate } from "react-router-dom";
 import {
   useGetProductByIdQuery,
   useGetCartQuery,
@@ -26,6 +26,8 @@ const Product = () => {
 
   // Get items currently in the cart
   const { data: cartItems } = useGetCartQuery();
+
+  const navigate = useNavigate();
 
   // Get current product data
   const { data: product } = useGetProductByIdQuery(productId);
@@ -55,6 +57,9 @@ const Product = () => {
     } else {
       // else add product to cart
       addCartItem({ productId, quantity });
+
+      // and navigate to cart
+      navigate("/cart");
     }
   };
 
