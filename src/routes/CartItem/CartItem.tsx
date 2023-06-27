@@ -43,9 +43,10 @@ const CartItem = ({ cartItem }: { cartItem: CartItem }) => {
   return (
     <Stack
       sx={{
-        flexDirection: "row",
-        paddingY: 2,
-        paddingLeft: 2,
+        flexDirection: { md: "row" },
+        alignItems: { xs: "center", sm: "flex-start" },
+        paddingY: "1rem",
+        paddingLeft: { sm: "1rem" },
         borderBottom: "1px solid gray",
       }}
     >
@@ -53,8 +54,8 @@ const CartItem = ({ cartItem }: { cartItem: CartItem }) => {
         <Box
           component="img"
           sx={{
-            width: 180,
-            height: 180,
+            width: { xs: 135, lg: 180 },
+            height: { xs: 135, lg: 180 },
           }}
           alt="product image"
           src={image}
@@ -62,19 +63,44 @@ const CartItem = ({ cartItem }: { cartItem: CartItem }) => {
       </Box>
       <Stack
         sx={{
-          paddingX: 2,
+          paddingLeft: { sm: "1rem" },
+          flexGrow: 1,
         }}
       >
-        <Link
-          variant="h6"
-          color="inherit"
-          underline="none"
-          component={RouterLink}
-          to={`/products/${productId}`}
+        <Stack
+          sx={{
+            flexDirection: { md: "row" },
+            alignItems: "",
+          }}
         >
-          {name}
-        </Link>
-        <FormControl sx={{ my: 4, minWidth: 120, maxWidth: 120 }} size="small">
+          <Link
+            variant="h6"
+            color="inherit"
+            underline="none"
+            component={RouterLink}
+            to={`/products/${productId}`}
+          >
+            {name}
+          </Link>
+          <Typography
+            variant="h6"
+            fontWeight={700}
+            component="h3"
+            flexGrow={1}
+            sx={{
+              textAlign: { md: "right" },
+              marginLeft: "1rem",
+            }}
+          >
+            {(price / 100).toLocaleString("en-GB", {
+              style: "currency",
+              currency: "GBP",
+            })}
+          </Typography>
+        </Stack>
+        <FormControl sx={{ my: 4, minWidth: 120,
+          maxWidth: {sm: 220, md: 120}
+        }} size="small">
           <InputLabel id="demo-simple-select-label">Quantity</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -94,24 +120,12 @@ const CartItem = ({ cartItem }: { cartItem: CartItem }) => {
         </FormControl>
         <Button
           variant="contained"
-          sx={{ my: 4, minWidth: 120, maxWidth: 120, mt: 0 }}
+          sx={{ my: 4, minWidth: 120, maxWidth: {sm: 220, md: 120 }, mt: 0 }}
           onClick={() => deleteCartItem(cartItemId)}
         >
           Delete
         </Button>
       </Stack>
-      <Typography
-        variant="h6"
-        fontWeight={700}
-        component="h3"
-        align="right"
-        flexGrow={1}
-      >
-        {(price / 100).toLocaleString("en-GB", {
-          style: "currency",
-          currency: "GBP",
-        })}
-      </Typography>
     </Stack>
   );
 };

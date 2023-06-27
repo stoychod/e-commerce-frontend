@@ -50,10 +50,11 @@ const Cart = () => {
     <Box sx={{ backgroundColor: "#eaeaed", width: "100%" }}>
       <Box padding={3} maxWidth="xl" marginX="auto">
         <Stack
-          direction="row"
-          spacing="1.5rem"
           padding="1rem"
-          alignItems="flex-start"
+          sx={{
+            flexDirection: { md: "row" },
+            alignItems: { md: "flex-start" },
+          }}
         >
           <Paper sx={{ flexGrow: 1, paddingX: 2 }}>
             <Typography variant="h4" component="h1" paddingTop="1rem">
@@ -66,6 +67,9 @@ const Cart = () => {
               lineHeight={1.2}
               align="right"
               borderBottom="1px solid gray"
+              sx={{
+                display: {xs: "none", md: "block"}
+              }}
             >
               price
             </Typography>
@@ -92,6 +96,8 @@ const Cart = () => {
               display: "flex",
               flexDirection: "column",
               padding: "2rem",
+              marginTop: { xs: "1.5rem", md: 0 },
+              marginLeft: { md: "0.75rem", lg: "1.5rem" },
             }}
           >
             <Typography component="div" gutterBottom variant="h6">
@@ -107,7 +113,15 @@ const Cart = () => {
             <Button sx={{ marginTop: "2rem" }} variant="contained">
               Proceed to ckeckout
             </Button>
-            <Button sx={{ marginTop: "2rem" }} variant="contained" color="secondary" href="/products"> Continue shopping</Button>
+            <Button
+              sx={{ marginTop: "2rem" }}
+              variant="contained"
+              color="secondary"
+              href="/products"
+            >
+              {" "}
+              Continue shopping
+            </Button>
           </Paper>
         </Stack>
       </Box>
