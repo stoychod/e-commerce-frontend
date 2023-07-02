@@ -68,7 +68,7 @@ const Cart = () => {
               align="right"
               borderBottom="1px solid gray"
               sx={{
-                display: {xs: "none", md: "block"}
+                display: { xs: "none", md: "block" },
               }}
             >
               price
@@ -110,7 +110,7 @@ const Cart = () => {
                 })}
               </Box>
             </Typography>
-            <Button sx={{ marginTop: "2rem" }} variant="contained">
+            <Button sx={{ marginTop: "2rem" }} variant="contained" href="/payment">
               Proceed to ckeckout
             </Button>
             <Button
