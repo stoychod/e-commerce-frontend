@@ -70,6 +70,12 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Cart"],
     }),
+    getOrders: builder.query<Order[], void>({
+      query: () => "/orders",
+    }),
+    getOrderById: builder.query<OrderItem[], string>({
+      query: (orderId) => `/orders/${orderId}`,
+    }),
   }),
 });
 
@@ -85,4 +91,6 @@ export const {
   useAddCartItemMutation,
   useUpdateCartItemMutation,
   useDeleteCartItemMutation,
+  useGetOrdersQuery,
+  useGetOrderByIdQuery,
 } = apiSlice;
