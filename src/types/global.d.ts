@@ -41,4 +41,5 @@ interface OrderItem {
   quantity: number;
   price: number;
   created_at: string;
+  image: string;
 }

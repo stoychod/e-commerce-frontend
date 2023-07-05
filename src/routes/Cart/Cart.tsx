@@ -89,7 +89,6 @@ const Cart = () => {
             color="secondary"
             href="/products"
           >
-            {" "}
             Continue shopping
           </Button>
         </Paper>

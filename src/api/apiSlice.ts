@@ -73,8 +73,8 @@ export const apiSlice = createApi({
     getOrders: builder.query<Order[], void>({
       query: () => "/orders",
     }),
-    getOrderById: builder.query<OrderItem[], string>({
-      query: (orderId) => `/orders/${orderId}`,
+    getOrderItems: builder.query<OrderItem[], number>({
+      query: (orderId) => `/orders/${orderId}/items`,
     }),
   }),
 });
@@ -92,5 +92,5 @@ export const {
   useUpdateCartItemMutation,
   useDeleteCartItemMutation,
   useGetOrdersQuery,
-  useGetOrderByIdQuery,
+  useGetOrderItemsQuery,
 } = apiSlice;
