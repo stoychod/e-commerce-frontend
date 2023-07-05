@@ -30,6 +30,15 @@ const AccountMenu = () => {
     }
   };
 
+  const handleOrders = async () => {
+    try {
+      navigate("/orders");
+      handleClose();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <IconButton
@@ -52,7 +61,7 @@ const AccountMenu = () => {
         }}
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleOrders}>Orders</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </>
