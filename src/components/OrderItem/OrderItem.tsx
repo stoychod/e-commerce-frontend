@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
+import Badge from "@mui/material/Badge";
 
 const OrderItem = ({
   productId,
@@ -25,17 +26,27 @@ const OrderItem = ({
         paddingY: "1rem",
       }}
     >
-      <Box component={RouterLink} to={`/products/${productId}`}>
-        <Box
-          component="img"
-          sx={{
-            width: { xs: 70, lg: 90 },
-            height: { xs: 70, lg: 90 },
-          }}
-          alt="product image"
-          src={image}
-        />
-      </Box>
+      <Badge
+        badgeContent={quantity > 1 ? quantity : 0}
+        color="secondary"
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        overlap="circular"
+      >
+        <Box component={RouterLink} to={`/products/${productId}`}>
+          <Box
+            component="img"
+            sx={{
+              width: { xs: 70, lg: 90 },
+              height: { xs: 70, lg: 90 },
+            }}
+            alt="product image"
+            src={image}
+          />
+        </Box>
+      </Badge>
       <Stack
         sx={{
           paddingLeft: "1rem",
