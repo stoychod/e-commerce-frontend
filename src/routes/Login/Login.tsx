@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
 import {
   useLoginUserMutation,
@@ -15,7 +16,7 @@ const Login = () => {
   const [loginUser, { error: loginError }] = useLoginUserMutation();
 
   const [createCart] = useCreateCartMutation();
-  const navigete = useNavigate();
+  const navigate = useNavigate();
 
   const renderError = (err: unknown) => {
     if (isApiError(err)) {
@@ -66,7 +67,7 @@ const Login = () => {
 
               // if response is ok reset the form
               resetForm();
-              navigete("/products");
+              navigate("/products");
             } catch (error) {
               console.error("Error:", error);
             }
@@ -115,7 +116,11 @@ const Login = () => {
                 >
                   Submit
                 </Button>
+                <Divider sx={{ color: "grey" }}>New to Eshop?</Divider>
               </Form>
+              <Button variant="outlined" fullWidth sx={{ marginTop: "1.5rem" }} onClick={() => navigate("/auth/register")}>
+                Create an account
+              </Button>
             </>
           )}
         </Formik>

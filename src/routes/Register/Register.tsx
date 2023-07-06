@@ -6,6 +6,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 import { useRegisterUserMutation } from "../../api/apiSlice";
 import { isApiError, isErrorWithMessage } from "../../api/helpers/errors";
 import { useNavigate } from "react-router-dom";
@@ -121,7 +122,11 @@ const Register = () => {
                 >
                   Submit
                 </Button>
+                <Divider sx={{ color: "grey" }}>Already a customer?</Divider>
               </Form>
+              <Button variant="outlined" fullWidth sx={{ marginTop: "1.5rem" }} onClick={() => navigate("/auth/register")}>
+                Sign in
+              </Button>
             </>
           )}
         </Formik>
