@@ -1,8 +1,9 @@
+import { Link as RouterLink } from "react-router-dom";
+import Link from "@mui/material/Link";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -23,9 +24,16 @@ const MenuAppBar = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="fixed">
           <Toolbar>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+            <Link
+              variant="h5"
+              color="inherit"
+              underline="none"
+              component={RouterLink}
+              to="/products"
+              sx={{ flexGrow: 1, fontWeight: 700, fontSize: { sm: "1.75rem" } }}
+            >
               Eshop
-            </Typography>
+            </Link>
             {isAuthenticated ? (
               <AccountMenu />
             ) : (
