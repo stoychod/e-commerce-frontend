@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
@@ -17,6 +18,8 @@ const Cart = () => {
   const [cartEmpty, setCartEmpty] = useState(
     cartItems && cartItems?.length < 1
   );
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     // calculate total price
@@ -79,7 +82,7 @@ const Cart = () => {
           <Button
             sx={{ marginTop: "2rem" }}
             variant="contained"
-            href="/payment"
+            onClick={() => navigate("/payment")}
           >
             Proceed to ckeckout
           </Button>
@@ -87,7 +90,7 @@ const Cart = () => {
             sx={{ marginTop: "2rem" }}
             variant="contained"
             color="secondary"
-            href="/products"
+            onClick={() => navigate("/products")}
           >
             Continue shopping
           </Button>

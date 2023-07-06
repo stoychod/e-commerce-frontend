@@ -34,7 +34,7 @@ const MenuAppBar = () => {
               </Button>
             )}
             <IconButton
-              href="/cart"
+              onClick={() => navigate("/cart")}
               aria-label="access shopping cart"
               color="inherit"
             >
@@ -45,7 +45,7 @@ const MenuAppBar = () => {
           </Toolbar>
         </AppBar>
         {/* Second toolbar is needed to ofset main content because of the fixed AppBar overlap  */}
-        <Toolbar/>
+        <Toolbar />
       </Box>
     </header>
   );
