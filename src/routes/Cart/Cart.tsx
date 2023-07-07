@@ -88,8 +88,7 @@ const Cart = () => {
           </Button>
           <Button
             sx={{ marginTop: "2rem" }}
-            variant="contained"
-            color="secondary"
+            variant="outlined"
             onClick={() => navigate("/products")}
           >
             Continue shopping
@@ -121,7 +120,6 @@ const Cart = () => {
                   fontWeight={400}
                   lineHeight={1.2}
                   align="right"
-                  // borderBottom="1px solid gray"
                   sx={{
                     display: { xs: "none", md: "block" },
                   }}
@@ -139,7 +137,6 @@ const Cart = () => {
                 variant="h6"
                 align="right"
                 marginBottom="3rem"
-                // borderTop="1px solid gray"
               >
                 Subtotal ({cartItems?.length}{" "}
                 {cartItems?.length === 1 ? "item" : "items"}):{" "}
