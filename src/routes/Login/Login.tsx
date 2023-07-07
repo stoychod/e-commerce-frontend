@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   useLoginUserMutation,
   useCreateCartMutation,
@@ -17,6 +17,11 @@ const Login = () => {
 
   const [createCart] = useCreateCartMutation();
   const navigate = useNavigate();
+  // if the user was redirected to the login page because authentication
+  // was required, get the location they came from so they can be redirected
+  // back to the desired location after successful authentication
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const renderError = (err: unknown) => {
     if (isApiError(err)) {
@@ -67,7 +72,7 @@ const Login = () => {
 
               // if response is ok reset the form
               resetForm();
-              navigate("/products");
+              navigate(from, { replace: true });
             } catch (error) {
               console.error("Error:", error);
             }
@@ -118,7 +123,12 @@ const Login = () => {
                 </Button>
                 <Divider sx={{ color: "grey" }}>New to Eshop?</Divider>
               </Form>
-              <Button variant="outlined" fullWidth sx={{ marginTop: "1.5rem" }} onClick={() => navigate("/auth/register")}>
+              <Button
+                variant="outlined"
+                fullWidth
+                sx={{ marginTop: "1.5rem" }}
+                onClick={() => navigate("/auth/register")}
+              >
                 Create an account
               </Button>
             </>

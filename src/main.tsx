@@ -18,6 +18,7 @@ import Cart from "./routes/Cart/Cart";
 import Payment from "./routes/Payment/Payment";
 import Completion from "./routes/Completion/Completion";
 import Orders from "./routes/Orders/Orders";
+import RequireAuth from "./components/RequireAuth/RequireAuth";
 
 const router = createBrowserRouter([
   {
@@ -43,20 +44,25 @@ const router = createBrowserRouter([
         element: <Product />,
       },
       {
-        path: "cart",
-        element: <Cart />,
-      },
-      {
-        path: "payment",
-        element: <Payment />,
-      },
-      {
-        path: "payment/completion",
-        element: <Completion />,
-      },
-      {
-        path: "orders",
-        element: <Orders />,
+        element: <RequireAuth />,
+        children: [
+          {
+            path: "cart",
+            element: <Cart />,
+          },
+          {
+            path: "payment",
+            element: <Payment />,
+          },
+          {
+            path: "payment/completion",
+            element: <Completion />,
+          },
+          {
+            path: "orders",
+            element: <Orders />,
+          },
+        ],
       },
     ],
   },
