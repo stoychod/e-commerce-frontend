@@ -30,7 +30,7 @@ const MenuAppBar = () => {
               underline="none"
               component={RouterLink}
               to="/products"
-              sx={{ flexGrow: 1, fontWeight: 700, fontSize: { sm: "1.75rem" } }}
+              sx={{ marginRight: "auto", fontWeight: 700, fontSize: { sm: "1.75rem" } }}
             >
               Eshop
             </Link>
