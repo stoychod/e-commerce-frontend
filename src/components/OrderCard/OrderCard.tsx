@@ -5,7 +5,7 @@ import Divider from "@mui/material/Divider";
 import { useGetOrderItemsQuery } from "../../api/apiSlice";
 import OrderItem from "../../components/OrderItem/OrderItem";
 
-const OrederCard = ({
+const OrderCard = ({
   orderId,
   total,
   orderDate,
@@ -15,10 +15,7 @@ const OrederCard = ({
   orderDate: string;
 }) => {
   const { data: orderItems, isSuccess } = useGetOrderItemsQuery(orderId);
-  if (isSuccess) {
-    console.log(orderItems);
-  }
-  return (
+    return (
     <Paper
       className="order-card"
       sx={{
@@ -97,7 +94,7 @@ const OrederCard = ({
                   image={image}
                   price={price}
                 />
-                {(orderItems.length - index) > 1 && <Divider />}
+                {orderItems.length - index > 1 && <Divider />}
               </>
             );
           })}
@@ -106,4 +103,4 @@ const OrederCard = ({
   );
 };
 
-export default OrederCard;
+export default OrderCard;
