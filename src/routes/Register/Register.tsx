@@ -124,7 +124,7 @@ const Register = () => {
                 </Button>
                 <Divider sx={{ color: "grey" }}>Already a customer?</Divider>
               </Form>
-              <Button variant="outlined" fullWidth sx={{ marginTop: "1.5rem" }} onClick={() => navigate("/auth/register")}>
+              <Button variant="outlined" fullWidth sx={{ marginTop: "1.5rem" }} onClick={() => navigate("/auth/login")}>
                 Sign in
               </Button>
             </>
