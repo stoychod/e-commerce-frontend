@@ -85,7 +85,7 @@ const Login = () => {
                 style={{ fontWeight: "500", marginBottom: "24px" }}
                 component="h1"
               >
-                Log in
+                Sign in
               </Typography>
               <Form className="form">
                 <Field
