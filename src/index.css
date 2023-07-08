@@ -21,8 +21,7 @@ main {
 }
 
 .form {
-  max-width: 20vw;
-  width: 20vw;
+  min-width: 18rem;
   display: grid;
   row-gap: var(--spacing-3);
 }
