@@ -6,6 +6,7 @@ import ErrorPage from "../ErrorPage/ErrorPage";
 const RequireAuth = () => {
   const {
     data: isAuthenticated,
+    isFetching,
     isSuccess,
     isError,
     error,
@@ -25,11 +26,14 @@ const RequireAuth = () => {
 
       return <Navigate to="/auth/login" state={{ from: location }} replace />;
     }
-
-    return <LoadingScreen />;
   };
 
-  return renderComponent();
+  return (
+    <>
+      <LoadingScreen open={isFetching} />
+      {renderComponent()}
+    </>
+  );
 };
 
 export default RequireAuth;
