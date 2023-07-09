@@ -4,11 +4,13 @@ import { useStripe, useElements } from "@stripe/react-stripe-js";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Typography } from "@mui/material";
+import LoadingScreen from '../LoadingScreen/LoadingScreen'
 
 export default function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
 
+  const [isLoading, setIsLoading] = useState(true);
   const [message, setMessage] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -43,40 +45,53 @@ export default function CheckoutForm() {
   };
 
   return (
-    <Box
-      sx={{
-        marginX: "auto",
-        marginTop: "5rem",
-      }}
-    >
+    <>
+      <LoadingScreen open={isLoading} />
       <Box
         sx={{
-          padding: "4rem 2rem",
-          border: "1px solid grey",
-          borderRadius: "4px",
+          marginX: "auto",
+          marginTop: "5rem",
+          display: isLoading ? "none" : "block",
         }}
       >
-        <form onSubmit={handleSubmit}>
-          <PaymentElement />
-          <Button
-            disabled={isProcessing || !stripe || !elements}
-            id="submit"
-            variant="contained"
-            type="submit"
-            fullWidth
-            sx={{ marginTop: "2rem" }}
-          >
-            <span id="button-text">
-              {isProcessing ? "Processing ... " : "Pay now"}
-            </span>
-          </Button>
-          {/* Show any error or success messages */}
-          {message && <Typography className="error-message" variant="body1" component="p" sx={{
-            textAlign: "center",
-            marginTop: "1rem"
-          }}>{message}</Typography>}
-        </form>
+        <Box
+          sx={{
+            padding: "4rem 2rem",
+            border: "1px solid grey",
+            borderRadius: "4px",
+          }}
+        >
+          <form onSubmit={handleSubmit}>
+            <PaymentElement onReady={() => setIsLoading(false)}/>
+            <Button
+              disabled={isProcessing || !stripe || !elements}
+              id="submit"
+              variant="contained"
+              type="submit"
+              fullWidth
+              sx={{ marginTop: "2rem" }}
+            >
+              <span id="button-text">
+                {isProcessing ? "Processing ... " : "Pay now"}
+              </span>
+            </Button>
+            {/* Show any error or success messages */}
+            {message && (
+              <Typography
+                className="error-message"
+                variant="body1"
+                component="p"
+                sx={{
+                  textAlign: "center",
+                  marginTop: "1rem",
+                }}
+              >
+                {message}
+              </Typography>
+            )}
+          </form>
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 }
